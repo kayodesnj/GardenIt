@@ -77,6 +77,7 @@ namespace GardenIt.Models.Storage
                 UserId = plant.UserId,
                 Notes = plant.Notes,
                 IsDeleted = false,
+                ImageName = plant.ImageName,
                 Waterings = plant.Waterings
                     .Select(x => ConvertToDb(x))
                     .ToList(),
@@ -93,6 +94,7 @@ namespace GardenIt.Models.Storage
                 DaysBetweenWatering = plantDb.DaysBetweenWatering,
                 UserId = plantDb.UserId,
                 Notes = plantDb.Notes,
+                ImageName = plantDb.ImageName,
                 Waterings = plantDb.Waterings
                     .Select(x => ConvertFromDb(x))
                     .ToList(),

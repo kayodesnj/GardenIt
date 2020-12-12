@@ -14,6 +14,7 @@ namespace GardenIt.Models.Engine
         public int DaysBetweenWatering { get; set; }
         public string Notes { get; set; }
         public List<Watering> Waterings { get; set; }
+        public string ImageName { get; set; }
 
         public DateTime NextWateringDate { 
             get {

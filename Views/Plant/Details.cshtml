@@ -1,9 +1,17 @@
 @using GardenIt.Models.Engine;
 @model Plant
 
-<h3>@Model.Name</h3>
+@{
+    ViewData["Title"] = "Details";
+}
+
 <div class="row">
     <div class="col-sm-7">
+        <h3>@Model.Name</h3>
+        <br/>
+        <div class="image-holder-details">
+            <img class="card-img-top plant-image" src="~/image/@Model.ImageName" alt="@Model.Name"/>
+        </div>
         <dl class="row">
             <dt class="col-sm-4">Type</dt>
             <dd class="col-sm-8">@Model.Type</dd>
@@ -14,13 +22,14 @@
             <dt class="col-sm-4">Days between Watering</dt>
             <dd class="col-sm-8">@Model.DaysBetweenWatering</dd>
 
+            <dt class="col-sm-4">Next Watering Date</dt>
+            <dd class="col-sm-8">@Model.NextWateringDate</dd>
+
             <dt class="col-sm-4">Notes</dt>
             <dd class="col-sm-8">@Model.Notes</dd>
         </dl>
         <div>
             <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
-            <span>&nbsp;&nbsp;</span>
-            <a asp-action="Water" asp-route-id="@Model.Id" class="card-link">Water</a>
             <span>&nbsp;&nbsp;</span>
             <form asp-action="Delete" style="display:inline">
                 <input type="hidden" asp-for="Id"/>
@@ -30,17 +39,20 @@
 
     </div>
     <div class="col-sm-5">
-        <table class="table">
+        <table class="table watering-table">
             <thead>
                 <tr>
-                    <th scope="col">Watering Date</th>
+                    <th scope="col">
+                        <span>Waterings</span>
+                        <a asp-action="Water" style="float:right" asp-route-id="@Model.Id" class="btn btn-primary btn-sm">Water</a>
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var watering in Model.Waterings) {
+                @foreach (var watering in Model.Waterings.OrderByDescending(x => x.WateringDate)) {
                     <tr>
                         <td>
-                            @watering.WateringDate.ToString("MMM dd, yyyy hh:mm")
+                            @watering.WateringDate.ToString("MMM d, yyyy hh:mmtt")
                         </td>
                     </tr>
                 }
@@ -50,7 +62,7 @@
     
 </div>
 
-<hr/>
+@* <hr/>
 <div>
     <a asp-action="Index">All Plants</a>
-</div>
+</div> *@

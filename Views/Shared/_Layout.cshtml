@@ -4,14 +4,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GardenIt</title>
+    <link rel="icon" href="~/image/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css"/>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 my-bg">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Plant" asp-action="Index">GardenIt</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Plant" asp-action="Index">
+                    <img src="~/image/main_image.png" width="30" height="26" alt="">
+                    <span class="text-light">
+                         &nbsp;
+                        GardenIt
+                    </span>
+                </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -36,14 +44,26 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-light my-bg">
         <div class="container">
-            &copy; 2020 - GardenIt - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2020 - GardenIt - <a class="text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>
 </html>
+
+<script>
+$(document).ready( function () {
+    $('.watering-table').DataTable({
+        "searching": false,   // Search Box will Be Disabled
+        "ordering": false,    // Ordering (Sorting on Each Column)will Be Disabled
+        "info": true,         // Will show "1 to n of n entries" Text at bottom
+        "lengthChange": false // Will Disabled Record number per page
+    });
+});
+</script>

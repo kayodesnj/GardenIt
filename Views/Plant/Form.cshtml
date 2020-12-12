@@ -2,6 +2,7 @@
 @model PlantViewModel
 
 @{
+    
     string pageTitle = "New Plant";
     string action = "Create";
 
@@ -9,13 +10,15 @@
         pageTitle = "Edit Plant";
         action = "Edit";
     }
+    ViewData["Title"] = pageTitle;
+
 }
 
 <div>
     <h2>@pageTitle</h2>
     <hr/>
     <div>
-        <form asp-action="@action">
+        <form asp-action="@action" enctype="multipart/form-data">
             <input type="hidden" asp-for="Id"/>
             <div class="form-group">
                 <label asp-for="Name">Name</label>
@@ -34,10 +37,21 @@
             </div>
             <div class="form-group">
                 <label asp-for="Notes">Notes</label>
-                <textarea class="form-control" asp-for="Notes" rows="4" cols="50"></textarea>
+                <textarea class="form-control" asp-for="Notes" rows="4" cols="50" maxlength="400"></textarea>
                 <span class="text-danger" asp-validation-for="Notes"></span>
             </div>
-            <button type="submit" class="btn btn-success">Save</button>
+            
+            <div class="form-group">
+                <label for="ImageFile">Image</label>
+                <input asp-for="ImageFile" accept="image/">
+                <span class="text-danger" asp-validation-for="ImageFile"></span>
+            </div>
+            @if (Model != null && Model.HasImage) {
+                <div class="image-holder-details">
+                    <img class="plant-image" src="~/image/@Model.ImageName" alt="@Model.Name"/>
+                </div>
+            }
+            <button type="submit" class="btn text-light my-bg">Save</button>
         </form>
     </div>
     <br/>
