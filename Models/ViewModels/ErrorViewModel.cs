@@ -1,6 +1,6 @@
 using System;
 
-namespace GardenIt.Models
+namespace GardenIt.Models.ViewModels
 {
     public class ErrorViewModel
     {

@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GardenIt.Models;
 
+using GardenIt.Models.ViewModels;
+
 namespace GardenIt.Controllers
 {
     public class HomeController : Controller

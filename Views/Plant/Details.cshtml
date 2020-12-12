@@ -1,0 +1,56 @@
+@using GardenIt.Models.Engine;
+@model Plant
+
+<h3>@Model.Name</h3>
+<div class="row">
+    <div class="col-sm-7">
+        <dl class="row">
+            <dt class="col-sm-4">Type</dt>
+            <dd class="col-sm-8">@Model.Type</dd>
+
+            <dt class="col-sm-4">Date Added</dt>
+            <dd class="col-sm-8">@Model.DateAdded</dd>
+
+            <dt class="col-sm-4">Days between Watering</dt>
+            <dd class="col-sm-8">@Model.DaysBetweenWatering</dd>
+
+            <dt class="col-sm-4">Notes</dt>
+            <dd class="col-sm-8">@Model.Notes</dd>
+        </dl>
+        <div>
+            <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+            <span>&nbsp;&nbsp;</span>
+            <a asp-action="Water" asp-route-id="@Model.Id" class="card-link">Water</a>
+            <span>&nbsp;&nbsp;</span>
+            <form asp-action="Delete" style="display:inline">
+                <input type="hidden" asp-for="Id"/>
+                <button class="btn btn-danger" type="submit">Delete</button>
+            </form>
+        </div>
+
+    </div>
+    <div class="col-sm-5">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Watering Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var watering in Model.Waterings) {
+                    <tr>
+                        <td>
+                            @watering.WateringDate.ToString("MMM dd, yyyy hh:mm")
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+
+<hr/>
+<div>
+    <a asp-action="Index">All Plants</a>
+</div>

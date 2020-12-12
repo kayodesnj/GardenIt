@@ -9,6 +9,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+
+using GardenIt.Models.Storage;
+using GardenIt.Models.Engine;
+
 namespace GardenIt
 {
     public class Startup
@@ -24,11 +30,28 @@ namespace GardenIt
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
+
+            string connectionString = Configuration.GetConnectionString("DefaultDB");
+            services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(connectionString));
+        
+            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddScoped<IStorePlants, PlantStorageEF>();
+            services.AddScoped<Garden>();
+        
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope()) {
+                using (var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>()) {
+                    context.Database.Migrate();
+                }
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -44,13 +67,15 @@ namespace GardenIt
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Plant}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
