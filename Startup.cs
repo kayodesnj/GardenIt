@@ -34,7 +34,7 @@ namespace GardenIt
                     .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IEmailSender, EmailSender>();
-            services.Configure<AuthMessageSenderOptions>(Configuration);
+            services.Configure<AuthMessageSenderOptions>(options => Configuration.GetSection("AuthMessageSenderOptions").Bind(options));
 
             services.AddScoped<IStorePlants, PlantStorageEF>();
             services.AddScoped<Garden>();
