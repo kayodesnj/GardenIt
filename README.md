@@ -37,7 +37,7 @@ To deploy this application:
 - Create an App Service in Azure
 - Ensure the Azure App Service extension is installed in VS Code
 - Ensure the extension is synced to your Azure account
-- Create a publish folder: `dotnet public -c Release -o ./publish`
+- Create a publish folder: `dotnet publish -c Release -o ./publish`
 - Deploy by right clicking on the publish folder and deploying to the web app
 
 The application is available at: https://www.gardenit.azurewebsites.net
