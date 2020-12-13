@@ -40,7 +40,7 @@ To deploy this application:
 - Create a publish folder: `dotnet publish -c Release -o ./publish`
 - Deploy by right clicking on the publish folder and deploying to the web app
 
-The application is available at: https://www.gardenit.azurewebsites.net
+The application is available at: https://gardenit.azurewebsites.net
 
 
 ## Resources
