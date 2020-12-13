@@ -69,3 +69,29 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+/************ CUSTOM ***************/
+.plant-image{
+  max-height: 100%;
+  width: auto;
+}
+
+.image-holder-details {
+  height: 200px;
+  width: auto;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.image-holder {
+  height: 200px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+}
+
+.my-bg {
+  background-color: rgb(67, 100, 67);
+}

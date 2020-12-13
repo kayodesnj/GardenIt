@@ -14,5 +14,6 @@ namespace GardenIt.Models.Storage.EFModels
         public string Notes { get; set; }
         public List<Watering> Waterings { get; set; }
         public bool IsDeleted { get; set; }
+        public string ImageName { get; set; }
     }
 }

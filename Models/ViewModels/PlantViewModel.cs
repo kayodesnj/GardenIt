@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Http;
 
 namespace GardenIt.Models.ViewModels
 {
@@ -21,5 +22,13 @@ namespace GardenIt.Models.ViewModels
 
         [MaxLength(400)]
         public string Notes { get; set; }
+
+        public IFormFile ImageFile { get; set; }
+        public string ImageName { get; set; }
+        public bool HasImage {
+            get {
+                return !String.IsNullOrEmpty(ImageName) && ImageName != "default.png";
+            }
+        }
     }
 }
